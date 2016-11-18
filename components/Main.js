@@ -32,11 +32,16 @@ export default class Main extends Component {
   }
 
 
-  renderRow = (text, sId, rId) => {
+  renderRow = (artist, sId, rId) => {
+    //console.log('doing render row with artist ', artist)
+    const imageUrl = artist.images[0] ? artist.images[0].url : null;
+
+    console.log('imgUrl , ' + imageUrl)
+
     return (
       <ListItem index={ rId }
-        text={text}
-        image={null} />
+        text={artist.name}
+        image={ imageUrl } />
     );
   }
 
@@ -62,7 +67,18 @@ export default class Main extends Component {
 
  makeQuery = debounce(query => {
     console.log('query? ', query);
- })
+    searchFor(query)
+      .then(artists => {
+        console.log(artists, ' got response')
+        this.setState({
+          artists: this.state.artists.cloneWithRows(artists)
+        })
+      })
+      .catch(error => {
+        throw error;
+      })
+
+ }, 400)
 
 }
 

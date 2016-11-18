@@ -17,6 +17,8 @@ const ListItem = ({ text, imageUrl }) => {
 		imageUrl ? { url: imageUrl } : placeholder
 	)
 
+	console.log('have this image ', imageUrl )
+
 	return (
 
 		<TouchableOpacity
