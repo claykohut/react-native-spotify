@@ -8,8 +8,9 @@ import {
   ListView,
   StatusBar
 } from 'react-native';
-
+import { debounce } from 'lodash'
 import colors from '../utils/colors';
+import {searchFor} from '../utils/fetcher'
 
 import ListItem from './ListItem'
 
@@ -23,10 +24,10 @@ export default class Main extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2
     })
 
-    const data = ['Spectacles', 'Giraffe', 'Turtle', 'Clay', 'Shark', 'Lamb', 'Salt',
-      'Beef', 'Drawer', 'Brocolli', 'Raspberries', 'Plate', 'Zebra']
+    // const data = ['Spectacles', 'Giraffe', 'Turtle', 'Clay', 'Shark', 'Lamb', 'Salt',
+    //   'Beef', 'Drawer', 'Brocolli', 'Raspberries', 'Plate', 'Zebra']
 
-    this.state = { artists: dataSource.cloneWithRows(data) };
+    this.state = { artists: dataSource };
 
   }
 
@@ -47,7 +48,8 @@ export default class Main extends Component {
 
         <StatusBar barStyle="default" />
 
-        <TextInput style={styles.searchBox} />
+        <TextInput style={styles.searchBox} 
+          onChangeText={ this.makeQuery } />
 
         <ListView dataSource={ artists }
             style={{ flex: 1, alignSelf: 'stretch' }}
@@ -57,6 +59,10 @@ export default class Main extends Component {
     )
 
   }
+
+ makeQuery = debounce(query => {
+    console.log('query? ', query);
+ })
 
 }
 

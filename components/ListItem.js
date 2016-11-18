@@ -7,7 +7,6 @@ import {
 	TouchableOpacity,
 	Image,
 } from 'react-native'
-
 import colors from '../utils/colors'
 
 const placeholder = require('../assets/placeholder.jpg');
