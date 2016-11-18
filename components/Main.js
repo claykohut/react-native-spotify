@@ -40,8 +40,8 @@ export default class Main extends Component {
 
     return (
       <ListItem index={ rId }
-        text={artist.name}
-        image={ imageUrl } />
+        text={artist.name} 
+        imageUrl={imageUrl} />
     );
   }
 
