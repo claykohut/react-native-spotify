@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import {
-    StyleSheet,
+  StyleSheet,
   View,
   Text,
   TextInput,
@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 
 import colors from '../utils/colors';
+
+import ListItem from './ListItem'
 
 export default class Main extends Component {
 
@@ -31,9 +33,9 @@ export default class Main extends Component {
 
   renderRow = (text, sId, rId) => {
     return (
-      <Text style={ styles.row }>
-        { rId }. { text }
-      </Text>
+      <ListItem index={ rId }
+        text={text}
+        image={null} />
     );
   }
 
