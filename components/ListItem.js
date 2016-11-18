@@ -8,10 +8,11 @@ import {
 	Image,
 } from 'react-native'
 import colors from '../utils/colors'
+import FadeInView from './FadeInView'
 
 const placeholder = require('../assets/placeholder.jpg');
 
-const ListItem = ({ text, imageUrl }) => {
+const ListItem = ({ index, text, imageUrl }) => {
 
 	const image = (
 		imageUrl ? { url: imageUrl } : placeholder
@@ -22,15 +23,17 @@ const ListItem = ({ text, imageUrl }) => {
 
 	return (
 
-		<TouchableOpacity
-			underlayColor={colors.gray}>
+		<FadeInView delay={ index * 25 }>
+			<TouchableOpacity
+				underlayColor={colors.gray}>
 
-			<View style={ styles.mediaObject }>
-				<Image source={image} style={ styles.image } />
-				<Text style={ styles.text }>{ text }</Text>
-			</View>
+				<View style={ styles.mediaObject }>
+					<Image source={image} style={ styles.image } />
+					<Text style={ styles.text }>{ text }</Text>
+				</View>
 
-		</TouchableOpacity>
+			</TouchableOpacity>
+		</FadeInView>
 	)
 
 }
