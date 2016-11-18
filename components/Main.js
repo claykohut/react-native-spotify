@@ -57,7 +57,7 @@ export default class Main extends Component {
           onChangeText={ this.makeQuery } />
 
         <ListView dataSource={ artists }
-            style={{ flex: 1, alignSelf: 'stretch' }}
+            style={ styles.listView }
             renderRow={ this.renderRow } />
 
       </View>
@@ -98,6 +98,10 @@ const styles = StyleSheet.create({
     margin: 16,
     paddingLeft: 10,
     fontWeight: '800'
+  },
+  listView: { 
+    flex: 1, 
+    alignSelf: 'stretch'
   },
   row: {
     padding: 15,
