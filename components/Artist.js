@@ -8,6 +8,7 @@ import {
 import colors from '../utils/colors'
 
 const Artist = ({ url }) => {
+	console.log('loading this url? ', url)
 	return (
 		<View style={{
 			backgroundColor: colors.white,
@@ -17,11 +18,13 @@ const Artist = ({ url }) => {
 			marginTop: 64
 		}}>
 			<WebView
-				style={{ flex: 1 }}>
-				source={{
-					url: url,
-					method: 'GET'
-				}}></WebView>
+		        style={{
+		          flex: 1,
+		        }}
+		        source={{
+		          uri: url,
+		          method: 'GET',
+		        }} />
 		</View>
 	)
 }
