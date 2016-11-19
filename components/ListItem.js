@@ -12,7 +12,7 @@ import FadeInView from './FadeInView'
 
 const placeholder = require('../assets/placeholder.jpg');
 
-const ListItem = ({ index, text, imageUrl }) => {
+const ListItem = ({ index, text, imageUrl, navState, navigator }) => {
 
 	const image = (
 		imageUrl ? { url: imageUrl } : placeholder
@@ -25,7 +25,8 @@ const ListItem = ({ index, text, imageUrl }) => {
 
 		<FadeInView delay={ index * 25 }>
 			<TouchableOpacity
-				underlayColor={colors.gray}>
+				underlayColor={colors.gray}
+				onPress={() => navigator.push(navState) }>
 
 				<View style={ styles.mediaObject }>
 					<Image source={image} style={ styles.image } />

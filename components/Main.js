@@ -34,14 +34,25 @@ export default class Main extends Component {
 
   renderRow = (artist, sId, rId) => {
     //console.log('doing render row with artist ', artist)
+    const { navigator } = this.props;
+
+    const ARTIST_STATE = {
+      id: 'ARTIST_DETAIL',
+      title: artist.name,
+      url: artist.external_urls.spotify
+    }
+
     const imageUrl = artist.images[0] ? artist.images[0].url : null;
 
     console.log('imgUrl , ' + imageUrl)
 
     return (
-      <ListItem index={ rId }
+      <ListItem 
+        index={ rId }
         text={artist.name} 
-        imageUrl={imageUrl} />
+        imageUrl={imageUrl}
+        navState={ ARTIST_STATE } 
+        navigator={ navigator } />
     );
   }
 
