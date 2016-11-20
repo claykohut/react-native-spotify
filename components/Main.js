@@ -8,12 +8,17 @@ import {
   ListView,
   StatusBar,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView
 } from 'react-native';
 import { debounce } from 'lodash'
 import colors from '../utils/colors';
 import {searchFor} from '../utils/fetcher'
 
 import ListItem from './ListItem'
+
+var DismissKeyboard = require('dismissKeyboard'); // Require React Native's utility library.
+
 
 export default class Main extends Component {
 
@@ -28,10 +33,12 @@ export default class Main extends Component {
     // const data = ['Spectacles', 'Giraffe', 'Turtle', 'Clay', 'Shark', 'Lamb', 'Salt',
     //   'Beef', 'Drawer', 'Brocolli', 'Raspberries', 'Plate', 'Zebra']
 
+
+
+
     this.state = { artists: dataSource };
 
   }
-
 
   renderRow = (artist, sId, rId) => {
     //console.log('doing render row with artist ', artist)
@@ -73,13 +80,14 @@ export default class Main extends Component {
     } else {
 
       mainList = <View style={ styles.emptyListView }>
-                   <Text style={ styles.emptyStateText }>List is Empty</Text>
+                        <Text style={ styles.emptyStateText }>List is Empty</Text>
                  </View>
     }
 
     
     return(
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior={'padding'}
+          style={styles.container}>
 
         <StatusBar barStyle="light-content" />
 
@@ -88,13 +96,15 @@ export default class Main extends Component {
           onChangeText={ this.makeQuery }
           clearButtonMode={'always'} />
 
-          { mainList }
+          <TouchableWithoutFeedback onPress={()=> DismissKeyboard()}>
+            { mainList }
+          </TouchableWithoutFeedback>
         
-      </View>
+      </KeyboardAvoidingView>
     )
 
   }
- 
+
  makeQuery = debounce(query => {
     console.log('query? ', query);
     searchFor(query)
@@ -136,8 +146,8 @@ const styles = StyleSheet.create({
   },
   emptyListView: { 
     flex: 1, 
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'center'/*,
+    alignItems: 'center'*/
   },
   emptyStateText: {
     fontSize: 20,
