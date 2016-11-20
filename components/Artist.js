@@ -8,8 +8,6 @@ import {
 
 import colors from '../utils/colors'
 
-
-
 const beforeLoadUrl = (navState)=>{
 	if( navState.url.indexOf('https://') > -1 || navState.url.indexOf('http://') > -1 ){
 		console.log('is http link! open in webview')
