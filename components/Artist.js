@@ -24,6 +24,7 @@ const beforeLoadUrl = (navState)=>{
 		  }
 		  return false
 		})
+		.catch(err => console.error('An error occurred', err));
 	}
 }
 
