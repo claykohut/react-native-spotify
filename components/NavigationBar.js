@@ -44,7 +44,7 @@ const NavigationBarRouteMapper = {
 
 const styles = StyleSheet.create({
 	navBar: {
-		backgroundColor: colors.blue
+		backgroundColor: colors.black
 	},
 	navBarText: {
 		fontSize: 16,

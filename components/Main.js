@@ -6,7 +6,8 @@ import {
   Text,
   TextInput,
   ListView,
-  StatusBar
+  StatusBar,
+  TouchableOpacity,
 } from 'react-native';
 import { debounce } from 'lodash'
 import colors from '../utils/colors';
@@ -62,10 +63,12 @@ export default class Main extends Component {
     return(
       <View style={styles.container}>
 
-        <StatusBar barStyle="default" />
+        <StatusBar barStyle="light-content" />
 
         <TextInput style={styles.searchBox} 
-          onChangeText={ this.makeQuery } />
+          ref={component => this._textInput = component}
+          onChangeText={ this.makeQuery }
+          clearButtonMode={'always'} />
 
         <ListView dataSource={ artists }
             style={ styles.listView }
@@ -75,7 +78,7 @@ export default class Main extends Component {
     )
 
   }
-
+ 
  makeQuery = debounce(query => {
     console.log('query? ', query);
     searchFor(query)
