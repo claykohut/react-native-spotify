@@ -90,7 +90,6 @@ export default class Main extends Component {
 
           { mainList }
         
-
       </View>
     )
 
@@ -112,7 +111,6 @@ export default class Main extends Component {
  }, 400)
 
 }
-
 
 const styles = StyleSheet.create({
   container: {
