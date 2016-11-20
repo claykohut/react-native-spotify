@@ -2,13 +2,35 @@ import React from 'react'
 
 import { 
 	View, 
-	WebView 
+	WebView,
+	Linking
 } from 'react-native'
 
 import colors from '../utils/colors'
 
+
+
+const beforeLoadUrl = (navState)=>{
+	if( navState.url.indexOf('https://') > -1 || navState.url.indexOf('http://') > -1 ){
+		console.log('is http link! open in webview')
+		return true
+	} else {
+		console.log('is native link! try to use native handler')
+		Linking.canOpenURL(navState.url).then(supported => {
+		  if (!supported) {
+		    console.log('Can\'t handle url: ' + navState.url);
+		  } else {
+		    Linking.openURL(navState.url);
+		  }
+		  return false
+		})
+	}
+}
+
 const Artist = ({ url }) => {
+
 	console.log('loading this url? ', url)
+
 	return (
 		<View style={{
 			backgroundColor: colors.white,
@@ -24,7 +46,8 @@ const Artist = ({ url }) => {
 		        source={{
 		          uri: url,
 		          method: 'GET',
-		        }} />
+		        }}
+		  	    onShouldStartLoadWithRequest={beforeLoadUrl} />
 		</View>
 	)
 }
