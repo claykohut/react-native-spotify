@@ -60,6 +60,24 @@ export default class Main extends Component {
   render() {
     const { artists } = this.state;
 
+    let mainList = null
+
+    console.log('has artists! ', artists)
+
+    if( artists._cachedRowCount > 0 ){
+      
+      mainList = <ListView dataSource={ artists }
+            style={ styles.listView }
+            renderRow={ this.renderRow } />
+
+    } else {
+
+      mainList = <View style={ styles.emptyListView }>
+                   <Text style={ styles.emptyStateText }>List is Empty</Text>
+                 </View>
+    }
+
+    
     return(
       <View style={styles.container}>
 
@@ -70,9 +88,8 @@ export default class Main extends Component {
           onChangeText={ this.makeQuery }
           clearButtonMode={'always'} />
 
-        <ListView dataSource={ artists }
-            style={ styles.listView }
-            renderRow={ this.renderRow } />
+          { mainList }
+        
 
       </View>
     )
@@ -110,12 +127,23 @@ const styles = StyleSheet.create({
     borderColor: colors.black,
     borderWidth: 2,
     margin: 16,
+    marginBottom: 0,
     paddingLeft: 10,
     fontWeight: '800'
   },
   listView: { 
+    marginTop: 16,
     flex: 1, 
     alignSelf: 'stretch'
+  },
+  emptyListView: { 
+    flex: 1, 
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  emptyStateText: {
+    fontSize: 20,
+    fontWeight: '500'
   },
   row: {
     padding: 15,
